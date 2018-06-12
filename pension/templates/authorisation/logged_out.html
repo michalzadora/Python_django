@@ -1,0 +1,20 @@
+{% block content %}
+<header>
+    <h1>You are logged out</h1>
+
+</header>
+<section>
+    <div id="container_demo" >
+        <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+        <a class="hiddenanchor" id="toregister"></a>
+        <a class="hiddenanchor" id="tologin"></a>
+        <div id="wrapper">
+            <div id="login" class="animate form">
+                <a href="{% url 'welcome'%}">
+                    <p style="text-align:center">Click here to login again.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

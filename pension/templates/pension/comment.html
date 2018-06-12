@@ -1,0 +1,65 @@
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sign the Guest Book</title>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'pension/comment.css' %}" rel="stylesheet">
+    <link href="{% static 'pension/style.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+
+<header>
+        <h1> Pension for project 3 in Python by Django</h1>
+
+</header>
+<section>
+    <h3>Welcome {{ user.get_username }}</h3>
+     <div class="navbar">
+        <a href="../">Home</a>
+      {% if rooms %}
+          <div class="dropdown">
+            <button class="dropbtn">Rooms
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+            {% for room in rooms %}
+                <a href="{% url 'pension:detail' room.id %}">{{ room.name}}</a>
+            {% endfor %}
+            </div>
+              {% else %}
+            <p>No rooms are available.</p>
+            {% endif %}
+          </div>
+         <a href="{% url 'pension:reservation' %}">Reservation</a>
+         <a href="{% url 'pension:comment' %}">Comment us</a>
+         <a href="{% url 'pension:contact' %}">Contact</a>
+    </div>
+</section>
+    <div align="center" class="container">
+
+      <form class="form-signin" method="POST" action="{% url 'pension:comment' %}">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Leave us comment</h2>
+        <div class="form-group">
+          {{ form.name }}
+        </div>
+        <div class="form-group">
+            {{ form.comment }}
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

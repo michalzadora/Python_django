@@ -1,0 +1,27 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'pension/style.css' %}" />
+
+{% block content %}
+<header>
+    <h1 align="center">Welcome in my project Pension</h1>
+    <h2 align="center"> Please login or register.</h2>
+</header>
+<section >
+    <div align="center" id="container_demo" >
+        <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+        <a class="hiddenanchor" id="toregister"></a>
+        <a class="hiddenanchor" id="tologin"></a>
+        <div id="wrapper">
+            <div id="login" class="animate form">
+                <form action="{% url 'login' %}">
+                    <input type="submit" value="LOGIN" />
+                </form>
+                <form action="{% url 'register' %}">
+                    <input type="submit" value="REGISTER" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

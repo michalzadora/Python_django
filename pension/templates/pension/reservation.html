@@ -1,0 +1,56 @@
+{% load static %}
+    <link href="{% static 'pension/comment.css' %}" rel="stylesheet">
+    <link href="{% static 'pension/style.css' %}" rel="stylesheet">
+{% block content %}
+<header>
+        <h1> Pension for project 3 in Python by Django</h1>
+
+</header>
+<section>
+    <h3>Welcome {{ user.get_username }}</h3>
+     <div class="navbar">
+        <a href="../">Home</a>
+      {% if rooms %}
+          <div class="dropdown">
+            <button class="dropbtn">Rooms
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+            {% for room in rooms %}
+                <a href="{% url 'pension:detail' room.id %}">{{ room.name}}</a>
+            {% endfor %}
+            </div>
+              {% else %}
+            <p>No rooms are available.</p>
+            {% endif %}
+          </div>
+         <a href="{% url 'pension:reservation' %}">Reservation</a>
+         <a href="{% url 'pension:comment' %}">Comment us</a>
+         <a href="{% url 'pension:contact' %}">Contact</a>
+    </div>
+</section>
+    <div align="center" class="container">
+
+      <form class="form-signin" method="POST" action="{% url 'pension:reservation' %}">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Make reservation request:</h2>
+        <div class="form-group">
+          {{ form.name }}
+        </div>
+        <div class="form-group">
+            {{ form.surname }}
+        </div>
+        <div class="form-group">
+            {{ form.date_from}}
+        </div>
+        <div class="form-group">
+            {{ form.date_to}}
+        </div>
+        <div class="form-group">
+            {{ form.room}}
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Send reservation</button>
+      </form>
+
+    </div> <!-- /container -->
+{% endblock%}
